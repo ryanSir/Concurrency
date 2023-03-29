@@ -22,6 +22,7 @@ public class FutureExample {
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();
+        // 通过future接受另外一个线程执行的结果
         Future<String> future = executorService.submit(new MyCallable());
         log.info("do something in main");
         Thread.sleep(1000);

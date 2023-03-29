@@ -2,16 +2,16 @@ package com.mmall.concurrency.example.aqs;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.Future;
-import java.util.concurrent.RecursiveTask;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.*;
 
 @Slf4j
 public class ForkJoinTaskExample extends RecursiveTask<Integer> {
 
-    public static final int threshold = 2;
-    private int start;
-    private int end;
+    public static final int                      threshold = 2;
+    private int                                  start;
+    private int                                  end;
 
     public ForkJoinTaskExample(int start, int end) {
         this.start = start;
@@ -21,7 +21,6 @@ public class ForkJoinTaskExample extends RecursiveTask<Integer> {
     @Override
     protected Integer compute() {
         int sum = 0;
-
         //如果任务足够小就计算任务
         boolean canCompute = (end - start) <= threshold;
         if (canCompute) {
